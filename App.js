@@ -1,38 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 
 export default function App() {
- const [name, setname] = useState('Gaye'); 
 
- const handleClick = () => {
-    setname('Amadou')
- }
+ const [person, setPerson] = useState([
+   {name: 'Amadou', key: '1'},
+   {name: 'Modou', key: '2'},
+   {name: 'Ousmane', key: '3'},
+   {name: 'Malick', key: '4'},
+   {name: 'Moussa', key: '5'},
+   {name: 'Demba', key: '6'},
+   {name: 'Ngoné', key: '7'},
+   {name: 'Adja', key: '8'}
+ ]); 
+
  
   return (
     <View style={styles.container}>
-        <View style={styles.header}>
-
-             <Text>Prénom : </Text>
-             <TextInput 
-             placeholder="Enter votre prénom "
-             onChangeText={(val)=>setname(val)} 
-             style={styles.input}/>
-
-             <Text>Age : </Text>
-             <TextInput 
-             placeholder="Enter votre age "
-             keyboardType='numeric'  
-             onChangeText={(val)=>setname(val)} 
-             style={styles.input}/>
-          
-      
-            <View style={styles.buttonContainer}> 
-               <Button title="Update state" onPress={handleClick}/>
-            </View>
-        </View>
-      <StatusBar style="auto" />
+      <ScrollView>
+          {
+            person.map((item) => (
+                <View>
+                    <Text style={styles.item}>{item.name}</Text>
+                </View>
+              ) 
+            )
+          }
+        </ScrollView>
     </View>
   );
 }
@@ -41,25 +37,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 5
   },
-  header: {
-    backgroundColor : 'yellow',
-    padding: 20,
-  },
-  name2: {
-    color: 'black',
-    fontWeight: 'bold'
-  },
-  buttonContainer: {
-    marginTop: 20,
-  },
-  input : {
-    borderWidth: 1,
-    borderColor: '#777',
-    padding: 8,
-    margin: 10,
-    width: 200 
+  item: {
+    marginTop: 24,
+    padding: 30,
+    backgroundColor: 'pink',
+    fontSize: 24
   }
 });
