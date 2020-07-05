@@ -19,15 +19,22 @@ export default function App() {
  
   return (
     <View style={styles.container}>
+      <FlatList  
+        data={person}
+        renderItem = {({item}) => (
+          <Text style={styles.item}>{item.name}</Text>
+        )}
+      
+      />
       <ScrollView>
-          {
+          {/* {
             person.map((item) => (
                 <View>
                     <Text style={styles.item}>{item.name}</Text>
                 </View>
               ) 
             )
-          }
+          } */}
         </ScrollView>
     </View>
   );
