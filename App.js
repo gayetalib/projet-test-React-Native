@@ -14,6 +14,8 @@ export default function App() {
    {text: 'Code every day', key: '4'},
    {text: 'Publish the project', key: '5'},
  ]);
+
+
  
  
   return (
@@ -24,7 +26,7 @@ export default function App() {
                 <FlatList
                    data={todos}
                    renderItem={({item}) => (
-                      <Todos item={item} />
+                      <Text style={styles.print}>{item.text}</Text>
                    )}
                 />
             </View>
@@ -40,5 +42,14 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 40
+  },
+  print: {
+       padding: 16,
+       marginTop: 16,
+       borderColor: '#bbb',
+       borderWidth: 1,
+       borderStyle: 'dashed',
+       borderRadius:10,
+
   }
 });
