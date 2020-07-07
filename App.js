@@ -4,6 +4,8 @@ import {useState } from "react";
 import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import Header from './components/Header';
 import Todos from './components/Todos';
+import AddTodo from './components/AddTodo';
+
 
 export default function App() {
 
@@ -12,16 +14,24 @@ export default function App() {
    {text: 'Do the modelisation', key: '2'},
    {text: 'Create github repo', key: '3'},
    {text: 'Code every day', key: '4'},
-   {text: 'Publish the project', key: '5'},
+   {text: 'cool Gaye', key: '5'},
  ]);
 
 
- 
+ const submitHandler = (text) => {
+  setTodos((prevTodo) => {
+     return [
+      {text: text, key: Math.random().toString()}, 
+        ...prevTodo
+     ]
+  })
+}
  
   return (
     <View style={styles.container}>
          <Header/>
          <View style={styles.content}>
+            <AddTodo submitHandler={submitHandler} />
             <View style={styles.list}>
                 <FlatList
                    data={todos}
