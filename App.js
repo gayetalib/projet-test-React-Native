@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList, Toucha
 import Header from './components/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
+import SandBox from './components/SandBox';
 
 
 export default function App() {
@@ -35,26 +36,28 @@ export default function App() {
 }
  
   return (
-    <TouchableWithoutFeedback onPress={() => {
-       Keyboard.dismiss();
-    }}>
-        <View style={styles.container}>
-            <Header/>
-            <View style={styles.content}>
-            <ScrollView>
-                <AddTodo submitHandler={submitHandler} />
-                <View style={styles.list}>
-                      <FlatList
-                        data={todos}
-                        renderItem={({item}) => (
-                            <Text style={styles.print}>{item.text}</Text>
-                        )}
-                      />
-                </View>
-                </ScrollView>
-            </View>
-        </View>
-    </TouchableWithoutFeedback>
+    <SandBox/>
+    // <TouchableWithoutFeedback onPress={() => {
+    //    Keyboard.dismiss();
+    // }}>
+    //     <View style={styles.container}>
+    //         <Header/>
+            
+    //         <View style={styles.content}>
+    //         <ScrollView>
+    //             <AddTodo submitHandler={submitHandler} />
+    //             <View style={styles.list}>
+    //                   <FlatList
+    //                     data={todos}
+    //                     renderItem={({item}) => (
+    //                         <Text style={styles.print}>{item.text}</Text>
+    //                     )}
+    //                   />
+    //             </View>
+    //             </ScrollView>
+    //         </View>
+    //     </View>
+    // </TouchableWithoutFeedback>
   );
 }
 
