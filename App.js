@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Header from './components/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
@@ -10,38 +10,51 @@ import AddTodo from './components/AddTodo';
 export default function App() {
 
  const [todos, setTodos] = useState([
-   {text: 'Start project', key: '1'},
+   {text: 'Start project gaye', key: '1'},
    {text: 'Do the modelisation', key: '2'},
    {text: 'Create github repo', key: '3'},
    {text: 'Code every day', key: '4'},
-   {text: 'cool Gaye', key: '5'},
+   {text: 'cool ok', key: '5'},
+   {text: 'cool Amadou', key: '6'},
  ]);
 
 
  const submitHandler = (text) => {
-  setTodos((prevTodo) => {
-     return [
-      {text: text, key: Math.random().toString()}, 
-        ...prevTodo
-     ]
-  })
+   if (text.length > 3) {
+      setTodos((prevTodo) => {
+        return [
+        {text: text, key: Math.random().toString()}, 
+          ...prevTodo
+        ]
+    })
+   }else{
+     Alert.alert("Message d'erreur", "Entrez au moins 3 caractères !", [
+       {text: "Ok"}
+     ])
+   }
 }
  
   return (
-    <View style={styles.container}>
-         <Header/>
-         <View style={styles.content}>
-            <AddTodo submitHandler={submitHandler} />
-            <View style={styles.list}>
-                <FlatList
-                   data={todos}
-                   renderItem={({item}) => (
-                      <Text style={styles.print}>{item.text}</Text>
-                   )}
-                />
+    <TouchableWithoutFeedback onPress={() => {
+       Keyboard.dismiss();
+    }}>
+        <View style={styles.container}>
+            <Header/>
+            <View style={styles.content}>
+            <ScrollView>
+                <AddTodo submitHandler={submitHandler} />
+                <View style={styles.list}>
+                      <FlatList
+                        data={todos}
+                        renderItem={({item}) => (
+                            <Text style={styles.print}>{item.text}</Text>
+                        )}
+                      />
+                </View>
+                </ScrollView>
             </View>
-         </View>
-    </View>
+        </View>
+    </TouchableWithoutFeedback>
   );
 }
 
